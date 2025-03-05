@@ -2,17 +2,24 @@ import tkinter as tk
 from tkinter import ttk
 from itertools import product
 import re
+import os
 
-# 定义拼音数据库文件路径与中文名的对应关系（改为相对路径）
+
+# 获取脚本所在目录的绝对路径
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+HANZI_QUERY_DIR = SCRIPT_DIR
+
+# 定义拼音数据库文件路径与中文名的对应关系（使用绝对路径）
 DATABASE_MAPPING = {
-    'HanziQuery/zdic.txt': '  汉典网',
-    'HanziQuery/kMandarin.txt': '  普通话常用读音数据',
-    'HanziQuery/kTGHZ2013.txt': '《通用规范汉字字典》',
-    'HanziQuery/kHanyuPinlu.txt': '《现代汉语频率词典》',
-    'HanziQuery/kMandarin_8105.txt': '《通用规范汉字表》',
-    'HanziQuery/kXHC1983.txt': '《现代汉语词典》',
-    'HanziQuery/kHanyuPinyin.txt': '《汉语大字典》',
+    os.path.join(HANZI_QUERY_DIR, 'zdic.txt'): '  汉典网',
+    os.path.join(HANZI_QUERY_DIR, 'kMandarin.txt'): '  普通话常用读音数据',
+    os.path.join(HANZI_QUERY_DIR, 'kTGHZ2013.txt'): '《通用规范汉字字典》',
+    os.path.join(HANZI_QUERY_DIR, 'kHanyuPinlu.txt'): '《现代汉语频率词典》',
+    os.path.join(HANZI_QUERY_DIR, 'kMandarin_8105.txt'): '《通用规范汉字表》',
+    os.path.join(HANZI_QUERY_DIR, 'kXHC1983.txt'): '《现代汉语词典》',
+    os.path.join(HANZI_QUERY_DIR, 'kHanyuPinyin.txt'): '《汉语大字典》',
 }
+
 
 class CCBSearchApp:
     def __init__(self, root):
@@ -22,7 +29,7 @@ class CCBSearchApp:
         self.root.geometry("900x500")  # 从 1000x500 减小到 800x500
         self.shuffle_mode = False  # 新增乱序模式标志
         self.shuffle_seed = None   # 新增随机种子
-        self.current_database = 'HanziQuery/kTGHZ2013.txt'  # 修改默认路径
+        self.current_database = os.path.join(HANZI_QUERY_DIR, 'kTGHZ2013.txt')
         
         # 窗口居中逻辑
         screen_width = self.root.winfo_screenwidth()
